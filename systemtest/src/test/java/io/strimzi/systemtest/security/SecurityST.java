@@ -24,6 +24,8 @@ import io.strimzi.operator.cluster.model.Ca;
 import io.strimzi.operator.common.model.Labels;
 import io.strimzi.systemtest.AbstractST;
 import io.strimzi.systemtest.Constants;
+import io.strimzi.systemtest.certs.BrokerCertBundle;
+import io.strimzi.systemtest.certs.openssl.OpenSSLUtil;
 import io.strimzi.systemtest.kafkaclients.externalClients.BasicExternalKafkaClient;
 import io.strimzi.systemtest.kafkaclients.internalClients.InternalKafkaClient;
 import io.strimzi.systemtest.resources.ResourceManager;
@@ -91,6 +93,15 @@ import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+class TestSecST extends AbstractST {
+    @Test
+    void testCustomCACertificates() throws Exception {
+        BrokerCertBundle certBundle = OpenSSLUtil.createBrokerCertBundle("my-custom-common-name");
+        System.out.println(certBundle);
+    }
+}
+
 
 @Tag(REGRESSION)
 class SecurityST extends AbstractST {
